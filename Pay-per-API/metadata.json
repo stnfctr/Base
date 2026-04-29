@@ -1,0 +1,6 @@
+{
+  "name": "NanoPay API Marketplace",
+  "description": "A micro-transaction based API marketplace where you only pay for what you use. Instant pay-per-call access without subscriptions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
