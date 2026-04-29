@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account data and wallet balance",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "balance": { "type": "number", "description": "Current balance in USD credits" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "balance"]
+    },
+    "Api": {
+      "title": "API Listing",
+      "description": "Information about an available API",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "pricePerCall": { "type": "number", "description": "Cost in USD credits per successful call" },
+        "category": { "type": "string" },
+        "provider": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "deprecated"] }
+      },
+      "required": ["name", "pricePerCall", "category"]
+    },
+    "Transaction": {
+      "title": "Transaction Log",
+      "description": "Record of a payment or usage deduction",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "apiId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["purchase", "usage"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "amount", "type", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and balances"
+    },
+    "/apis/{apiId}": {
+      "schema": "Api",
+      "description": "Public API marketplace listings"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Private audit log for user transactions"
+    }
+  }
+}
